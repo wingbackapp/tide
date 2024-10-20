@@ -10,7 +10,7 @@
 //!
 //! ```toml
 //! # Example, use the version numbers you need
-//! tide = "0.14.0"
+//! tide = "0.17.0"
 //! async-std = { version = "1.6.0", features = ["attributes"] }
 //! serde = { version = "1.0", features = ["derive"] }
 //!```
@@ -81,11 +81,12 @@ pub mod listener;
 pub mod log;
 pub mod prelude;
 pub mod security;
-pub mod sse;
 pub mod utils;
 
 #[cfg(feature = "sessions")]
 pub mod sessions;
+#[cfg(feature = "sse")]
+pub mod sse;
 
 pub use endpoint::Endpoint;
 pub use middleware::{Middleware, Next};
@@ -96,7 +97,7 @@ pub use response_builder::ResponseBuilder;
 pub use route::Route;
 pub use server::Server;
 
-pub use http_types::{self as http, Body, Error, Status, StatusCode};
+pub use http_types::{self as http, Body, Error, Method, Status, StatusCode};
 
 /// Create a new Tide server.
 ///

@@ -13,7 +13,6 @@ use futures_util::stream::{futures_unordered::FuturesUnordered, StreamExt};
 /// ```rust
 /// fn main() -> Result<(), std::io::Error> {
 ///    async_std::task::block_on(async {
-///        tide::log::start();
 ///        let mut app = tide::new();
 ///        app.at("/").get(|_| async { Ok("Hello, world!") });
 ///
@@ -113,8 +112,7 @@ where
     fn info(&self) -> Vec<ListenInfo> {
         self.listeners
             .iter()
-            .map(|listener| listener.info().into_iter())
-            .flatten()
+            .flat_map(|listener| listener.info().into_iter())
             .collect()
     }
 }

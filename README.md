@@ -53,7 +53,7 @@ runtime. After running `cargo init` add the following lines to your
 
 ```toml
 # Example, use the version numbers you need
-tide = "0.16.0"
+tide = "0.17.0"
 async-std = { version = "1.8.0", features = ["attributes"] }
 serde = { version = "1.0", features = ["derive"] }
 ```
@@ -133,6 +133,7 @@ team. Use at your own risk.</sup>
 ### Auth
 * [tide-http-auth](https://github.com/chrisdickinson/tide-http-auth)
 * [tide-openidconnect](https://github.com/malyn/tide-openidconnect)
+* [tide-jwt](https://github.com/nyxtom/tide-jwt)
 
 ### Testing
 * [tide-testing](https://github.com/jbr/tide-testing)
@@ -147,6 +148,7 @@ team. Use at your own risk.</sup>
 * [tide-compressed-sse](https://github.com/Yarn/tide_compressed_sse)
 * [tide-websockets](https://github.com/http-rs/tide-websockets)
 * [tide-csrf](https://github.com/malyn/tide-csrf)
+* [tide-flash](https://github.com/nyxtom/tide-flash)
 
 ### Session Stores
 * [async-redis-session](https://github.com/jbr/async-redis-session)

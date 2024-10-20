@@ -1,7 +1,8 @@
 #[async_std::main]
 async fn main() -> Result<(), std::io::Error> {
-    tide::log::start();
+    femme::start();
     let mut app = tide::new();
+    app.with(tide::log::LogMiddleware::new());
 
     app.with(tide::sessions::SessionMiddleware::new(
         tide::sessions::MemoryStore::new(),

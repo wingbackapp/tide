@@ -1,11 +1,10 @@
-use crate::log;
+use kv_log_macro::{error, info, warn};
+
 use crate::{Middleware, Next, Request};
 
 /// Log all incoming requests and responses.
 ///
-/// This middleware is enabled by default in Tide. In the case of
-/// nested applications, this middleware will only run once for each
-/// request.
+/// In the case of nested applications, this middleware will only run once for each request.
 ///
 /// # Examples
 ///
@@ -40,7 +39,7 @@ impl LogMiddleware {
 
         let path = req.url().path().to_owned();
         let method = req.method().to_string();
-        log::info!("<-- Request received", {
+        info!("<-- Request received", {
             method: method,
             path: path,
         });
@@ -49,7 +48,7 @@ impl LogMiddleware {
         let status = response.status();
         if status.is_server_error() {
             if let Some(error) = response.error() {
-                log::error!("Internal error --> Response sent", {
+                error!("Internal error --> Response sent", {
                     message: format!("{:?}", error),
                     error_type: error.type_name(),
                     method: method,
@@ -58,7 +57,7 @@ impl LogMiddleware {
                     duration: format!("{:?}", start.elapsed()),
                 });
             } else {
-                log::error!("Internal error --> Response sent", {
+                error!("Internal error --> Response sent", {
                     method: method,
                     path: path,
                     status: format!("{} - {}", status as u16, status.canonical_reason()),
@@ -67,7 +66,7 @@ impl LogMiddleware {
             }
         } else if status.is_client_error() {
             if let Some(error) = response.error() {
-                log::warn!("Client error --> Response sent", {
+                warn!("Client error --> Response sent", {
                     message: format!("{:?}", error),
                     error_type: error.type_name(),
                     method: method,
@@ -76,7 +75,7 @@ impl LogMiddleware {
                     duration: format!("{:?}", start.elapsed()),
                 });
             } else {
-                log::warn!("Client error --> Response sent", {
+                warn!("Client error --> Response sent", {
                     method: method,
                     path: path,
                     status: format!("{} - {}", status as u16, status.canonical_reason()),
@@ -84,7 +83,7 @@ impl LogMiddleware {
                 });
             }
         } else {
-            log::info!("--> Response sent", {
+            info!("--> Response sent", {
                 method: method,
                 path: path,
                 status: format!("{} - {}", status as u16, status.canonical_reason()),

@@ -3,9 +3,10 @@ mod unix_tests {
     use async_std::os::unix::net::UnixStream;
     use async_std::prelude::*;
     use async_std::task;
-    use http_types::{url::Url, Method, Request};
+    use http_types::{url::Url, Request};
     use std::time::Duration;
     use tempfile::tempdir;
+    use tide::Method;
 
     #[test]
     fn hello_unix_world() -> Result<(), http_types::Error> {
